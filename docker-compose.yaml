@@ -1,0 +1,49 @@
+services:
+  mongodb:
+    image: mongodb:v1
+    container_name: mongodb
+    volumes:
+    - mongodb:/data/db
+  catalogue:
+    image: catalogue:v1
+    container_name: catalogue
+  frontend:
+    image: frontend:v1
+    container_name: frontend
+  redis:
+    image: redis:7
+    container_name: redis
+    volumes:
+    - redis:/data
+  user:
+    image: user:v1
+    container_name: user
+  cart:
+    image: cart:v1
+    container_name: cart
+  mysql:
+    image: mysql:v1
+    container_name: mysql
+    volumes:
+    - mysql:/var/lib/mysql
+  shipping:
+    image: shipping:v1
+    container_name: shipping
+  payment:
+    image: payment:v1
+    container_name: payment
+  rabbitmq:
+    image: rabbitmq:3
+    container_name: rabbitmq
+    volumes:
+    - rabbitmq:/var/lib/rabbitmq
+
+networks:
+  default: bridge
+  name: roboshop
+  external: true
+volumes:
+  mysql:
+  rabbitmq:
+  mongodb:
+  redis:

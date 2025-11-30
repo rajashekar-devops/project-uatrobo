@@ -54,7 +54,7 @@ networks:
   default: 
     driver: bridge
     name: roboshop
-    external: true
+    external: false
 volumes:
   mysql:
   rabbitmq:

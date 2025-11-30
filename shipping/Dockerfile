@@ -10,7 +10,7 @@ FROM eclipse-temurin:17-jdk
 EXPOSE 8080
 WORKDIR /opt/roboshop-shipping
 RUN addgroup -S roboshop && adduser -S roboshop -G roboshop && \
-    chown -R roboshop:roboshop /opt/roboshop-user
+    chown -R roboshop:roboshop /opt/roboshop-shipping
 COPY --from=builder /opt/roboshop-shipping/shipping.jar .
 USER roboshop
 ENV CART_ENDPOINT="cart:8080" \

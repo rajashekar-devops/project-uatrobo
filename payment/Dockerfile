@@ -14,8 +14,12 @@ RUN pip3 install -r requirements.txt
 FROM python:3.11-alpine
 EXPOSE 8080
 WORKDIR /opt/roboshop-payment
+# Install runtime dependencies only
+RUN apk add --no-cache pcre
 RUN addgroup -S roboshop && adduser -S roboshop -G roboshop
-COPY --from=build --chown=roboshop:roboshop /opt/roboshop-payment/ .
+# copy python packages installed from build stage
+COPY --from=build /install /usr/local
+COPY --from=build --chown=roboshop:roboshop /build opt/roboshop-payment
 USER roboshop
 ENV CART_HOST="cart" \
     CART_PORT="8080" \

@@ -1,14 +1,19 @@
 services:
   mongodb:
-    image: mongodb:v1
+    build:
+      context: ./mongodb
+      dockerfile: Dockerfile
+    image: docker4rajashekar/mongodb:v1
     container_name: mongodb
     volumes:
     - mongodb:/data/db
   catalogue:
-    image: catalogue:v1
+    build: ./catalogue
+    image: docker4rajashekar/catalogue:v1
     container_name: catalogue
   frontend:
-    image: frontend:v1
+    build: ./frontend
+    image: docker4rajashekar/frontend:v1
     container_name: frontend
   redis:
     image: redis:7
@@ -16,21 +21,26 @@ services:
     volumes:
     - redis:/data
   user:
-    image: user:v1
+    build: ./user
+    image: docker4rajashekar/user:v1
     container_name: user
   cart:
-    image: cart:v1
+    build: ./cart
+    image: docker4rajashekar/cart:v1
     container_name: cart
   mysql:
-    image: mysql:v1
+    build: ./mysql
+    image: docker4rajashekar/mysql:v1
     container_name: mysql
     volumes:
     - mysql:/var/lib/mysql
   shipping:
-    image: shipping:v1
+    build: ./shipping
+    image: docker4rajashekar/shipping:v1
     container_name: shipping
   payment:
-    image: payment:v1
+    build: ./payment
+    image: docker4rajashekar/payment:v1
     container_name: payment
   rabbitmq:
     image: rabbitmq:3

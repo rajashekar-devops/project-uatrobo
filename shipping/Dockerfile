@@ -2,7 +2,7 @@ FROM maven:3.9 AS builder
 WORKDIR /opt/roboshop-shipping
 COPY src ./src
 COPY pom.xml .
-RUN mvn clean package \
+RUN mvn clean package && \
     mv target/*.jar shipping.jar
 
 

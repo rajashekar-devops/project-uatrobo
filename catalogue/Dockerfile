@@ -15,7 +15,7 @@ ENV MONGO="true" \
 COPY --from=build /opt/roboshop-catalogue /opt/roboshop-catalogue
 EXPOSE 8080
 LABEL com.projects="roboshop" \
-      component="catalogue"
+      component="catalogue" \
       created_by="rajashekar"
 USER roboshop
 ENTRYPOINT ["node"]

@@ -11,7 +11,7 @@ COPY requirements.txt .
 RUN pip3 install -r requirements.txt
 
 
-FROM python:3.12-alpine
+FROM python:3.11-alpine
 EXPOSE 8080
 WORKDIR /opt/roboshop-payment
 RUN addgroup -S roboshop && adduser -S roboshop -G roboshop

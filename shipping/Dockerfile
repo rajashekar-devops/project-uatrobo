@@ -15,7 +15,8 @@ COPY --from=builder --chown=roboshop:roboshop /opt/roboshop-shipping/shipping.ja
 USER roboshop
 ENV CART_ENDPOINT="cart:8080" \
     DB_HOST="mysql"
-CMD ["java", "-jar", "shipping.jar"]
+CMD ["sh", "-c", "sleep 20 && java -jar shipping.jar"]
+# CMD ["java", "-jar", "shipping.jar"]
 
 
 

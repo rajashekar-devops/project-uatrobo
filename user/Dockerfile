@@ -11,11 +11,10 @@ WORKDIR /opt/roboshop-user
 RUN addgroup -S roboshop && adduser -S roboshop -G roboshop && \
     chown -R roboshop:roboshop /opt/roboshop-user
 EXPOSE 8080
-ENV REDIS_HOST="redis" \
-    USER_HOST="user" \
-    USER_PORT="8080"
+ENV MONGO="true" \
+    REDIS_URL='redis://redis:6379' \
+    MONGO_URL="mongodb://mongodb:27017/users"
 COPY --from=build /opt/roboshop-user /opt/roboshop-user
-
 LABEL com.projects="roboshop" \
       component="user" \
       created_by="rajashekar"

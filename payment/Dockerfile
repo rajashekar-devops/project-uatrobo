@@ -15,7 +15,7 @@ FROM python:3.11-alpine
 EXPOSE 8080
 WORKDIR /opt/roboshop-payment
 RUN addgroup -S roboshop && adduser -S roboshop -G roboshop
-COPY --from=build --chown=roboshop:roboshop /opt/roboshop-payment .
+COPY --from=build --chown=roboshop:roboshop /opt/roboshop-payment/ .
 USER roboshop
 ENV CART_HOST="cart" \
     CART_PORT="8080" \

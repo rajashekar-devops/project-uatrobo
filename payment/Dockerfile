@@ -1,15 +1,14 @@
-FROM python:3.11-alpine AS build
+FROM python:3.9.25-alpine3.21 AS build
+WORKDIR /opt/roboshop-payment
 RUN apk add --no-cache \
     build-base \
     linux-headers \
-    pcre-dev \
-    python3-dev
-WORKDIR /opt/roboshop-payment
+    pcre-dev
 COPY requirements.txt .
 RUN pip3 install --prefix=/install -r requirements.txt
 
 
-FROM python:3.11-alpine
+FROM python:3.9.25-alpine3.21
 EXPOSE 8080
 WORKDIR /opt/roboshop-payment
 # Install runtime dependencies only

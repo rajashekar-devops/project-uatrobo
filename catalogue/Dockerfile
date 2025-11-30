@@ -13,7 +13,10 @@ RUN addgroup -S roboshop && adduser -S roboshop -G roboshop && \
 ENV MONGO="true" \
     MONGO_URL="mongodb://mongodb:27017/catalogue"
 COPY --from=build /opt/roboshop-catalogue /opt/roboshop-catalogue
-
+EXPOSE 8080
+LABEL com.projects="roboshop" \
+      component="catalogue"
+      created_by="rajashekar"
 USER roboshop
 ENTRYPOINT ["node"]
 CMD ["server.js"]

@@ -6,12 +6,12 @@ RUN mvn clean package && \
     mv target/*.jar shipping.jar
 
 
-FROM eclipse-temurin:17-jdk
+FROM eclipse-temurin:17-jdk-alpine
 EXPOSE 8080
 WORKDIR /opt/roboshop-shipping
-RUN addgroup -S roboshop && adduser -S roboshop -G roboshop && \
-    chown -R roboshop:roboshop /opt/roboshop-shipping
-COPY --from=builder /opt/roboshop-shipping/shipping.jar .
+RUN addgroup -S roboshop && adduser -S roboshop -G roboshop
+EXPOSE 8080
+COPY --from=builder --chown=roboshop:roboshop /opt/roboshop-shipping/shipping.jar .
 USER roboshop
 ENV CART_ENDPOINT="cart:8080" \
     DB_HOST="mysql"

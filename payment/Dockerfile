@@ -5,10 +5,8 @@ RUN apk add --no-cache \
     pcre-dev \
     python3-dev
 WORKDIR /opt/roboshop-payment
-COPY payment.ini .
-COPY *.py .
 COPY requirements.txt .
-RUN pip3 install -r requirements.txt
+RUN pip3 install --prefix=/install -r requirements.txt
 
 
 FROM python:3.11-alpine
@@ -19,7 +17,8 @@ RUN apk add --no-cache pcre
 RUN addgroup -S roboshop && adduser -S roboshop -G roboshop
 # copy python packages installed from build stage
 # COPY --from=build /install /usr/local
-COPY --from=build --chown=roboshop:roboshop /opt/roboshop-payment
+COPY --from=build /install /usr/local
+COPY --chown=roboshop:roboshop payment.ini *.py requirements.txt .
 USER roboshop
 ENV CART_HOST="cart" \
     CART_PORT="8080" \

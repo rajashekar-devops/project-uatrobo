@@ -15,7 +15,8 @@ services:
     build: ./frontend
     image: docker4rajashekar/frontend:v1
     container_name: frontend
-    ports: 80:80
+    ports: 
+    - 80:80
   redis:
     image: redis:7
     container_name: redis

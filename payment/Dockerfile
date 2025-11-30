@@ -8,7 +8,7 @@ WORKDIR /opt/roboshop-payment
 COPY payment.ini .
 COPY *.py .
 COPY requirements.txt .
-RUN pip3 install -r requirements.txt
+RUN pip3 install --prefix=/install -r requirements.txt
 
 
 FROM python:3.11-alpine

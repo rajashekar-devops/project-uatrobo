@@ -1,4 +1,4 @@
-FROM python:3.12-alpine AS build
+FROM python:3.11-alpine AS build
 WORKDIR /opt/roboshop-payment
 COPY payment.ini .
 COPY *.py .

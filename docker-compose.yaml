@@ -49,9 +49,10 @@ services:
     - rabbitmq:/var/lib/rabbitmq
 
 networks:
-  default: bridge
-  name: roboshop
-  external: true
+  default: 
+    driver: bridge
+    name: roboshop
+    external: true
 volumes:
   mysql:
   rabbitmq:

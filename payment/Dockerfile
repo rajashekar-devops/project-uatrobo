@@ -1,4 +1,9 @@
-FROM python:3.9-alpine AS build
+FROM python:3.11-alpine AS build
+RUN apk add --no-cache \
+    build-base \
+    linux-headers \
+    pcre-dev \
+    python3-dev
 WORKDIR /opt/roboshop-payment
 COPY payment.ini .
 COPY *.py .

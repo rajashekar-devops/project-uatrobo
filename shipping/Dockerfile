@@ -1,10 +1,32 @@
-FROM maven:3.9
-EXPOSE 8080
+FROM maven:3.9 AS builder
 WORKDIR /opt/roboshop-shipping
 COPY src ./src
 COPY pom.xml .
-RUN mvn clean package
-RUN mv target/*.jar shipping.jar
+RUN mvn clean package \
+    mv target/*.jar shipping.jar
+
+
+FROM eclipse-temurin:17-jdk
+EXPOSE 8080
+WORKDIR /opt/roboshop-shipping
+RUN addgroup -S roboshop && adduser -S roboshop -G roboshop && \
+    chown -R roboshop:roboshop /opt/roboshop-user
+COPY --from=builder /opt/roboshop-shipping/shipping.jar .
+USER roboshop
 ENV CART_ENDPOINT="cart:8080" \
     DB_HOST="mysql"
 CMD ["java", "-jar", "shipping.jar"]
+
+
+
+
+# FROM maven:3.9
+# EXPOSE 8080
+# WORKDIR /opt/roboshop-shipping
+# COPY src ./src
+# COPY pom.xml .
+# RUN mvn clean package
+# RUN mv target/*.jar shipping.jar
+# ENV CART_ENDPOINT="cart:8080" \
+#     DB_HOST="mysql"
+# CMD ["java", "-jar", "shipping.jar"]
